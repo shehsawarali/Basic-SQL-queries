@@ -1,0 +1,40 @@
+#Shehsawar Ali 21100070        
+	.pos 0
+step1:  irmovq  Stack, %rsp     
+        irmovq  Stack, %rbp
+	irmovq  src, %rdi
+	irmovq  dest, %rsi
+        irmovq  $3, %rdx
+        call    copy_block      
+        halt               
+
+# Source block
+src:
+	.quad 0x00a
+	.quad 0x0b0
+	.quad 0xc00
+
+# Destination block
+dest:
+        .long 0x111
+        .long 0x222
+        .long 0x333
+
+# Src RDI, dest RSI, len RDX, val RBX. RESULT rax
+copy_block: 	irmovq  $0, %rax
+		andq    %rdx, %rdx
+		je      Return
+While:  	irmovq  $8, %r8
+		mrmovq  (%rdi), %rbx
+		addq    %r8, %rdi
+		rmmovq  %rbx, (%rsi)
+		addq    %r8, %rsi
+		xorq    %rbx, %rax
+		irmovq  $1, %r9
+		subq    %r9, %rdx  
+		andq    %rdx, %rdx
+		jne	While
+Return:		ret
+
+        .pos 0x200
+Stack:

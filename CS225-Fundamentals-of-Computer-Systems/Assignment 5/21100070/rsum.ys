@@ -1,0 +1,38 @@
+#Shehsawar Ali 21100070              
+	.pos 0
+step1:  irmovq  Stack, %rbp
+        irmovq  Stack, %rsp
+        irmovq  ele1, %rdi
+	irmovq  $0, %rax
+        call    rsum_list
+        halt 
+
+
+# Sample linked list
+	.align 8
+ele1:
+	.quad 0x00a
+	.quad ele2
+ele2:	
+	.quad 0x0b0
+	.quad ele3
+ele3:
+	.quad 0xc00
+	.quad 0
+
+#ls rdi  val rsi   rest rax
+rsum_list:  pushq   %rsi
+            andq    %rdi, %rdi
+	    je      Return
+            mrmovq  (%rdi), %rsi 
+            mrmovq  8(%rdi), %rdi
+            pushq   %rdi
+            call    rsum_list       
+            addq    %rsi, %rax       
+            popq    %rdi
+Return:     popq    %rsi
+            mrmovq  8(%rbp), %rdi    
+            ret
+
+        .pos 0x200
+Stack:

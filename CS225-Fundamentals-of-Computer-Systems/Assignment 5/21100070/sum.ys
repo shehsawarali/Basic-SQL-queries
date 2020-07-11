@@ -1,0 +1,33 @@
+#Shehsawar Ali 21100070            
+	.pos 0
+step1:  irmovq  Stack, %rbp    
+        irmovq  Stack, %rsp      
+        irmovq  ele1, %rdi
+        call    sum_list       
+        halt                    
+
+#Sample Linked List
+	.align 8
+ele1:
+	.quad 0x00a
+	.quad ele2
+ele2:	
+	.quad 0x0b0
+	.quad ele3
+ele3:
+	.quad 0xc00
+	.quad 0
+
+#ls rdi val rax
+sum_list:   irmovq  $0, %rax           
+            andq    %rdi, %rdi       
+            je      Return
+While:      mrmovq  (%rdi), %rcx     
+            addq    %rcx, %rax       #No memory register addition
+            mrmovq  8(%rdi), %rdi    
+            andq    %rdi, %rdi       
+            jne     While
+Return:     ret
+
+        .pos 0x200
+Stack:

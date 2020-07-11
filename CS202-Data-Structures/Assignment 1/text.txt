@@ -1,0 +1,1 @@
+A stack is a dynamic data set in which elements use the Last-In-First-Out principle (LIFO) to define data structure - this structure limits data in the way that it can only be added to or removed from the top.

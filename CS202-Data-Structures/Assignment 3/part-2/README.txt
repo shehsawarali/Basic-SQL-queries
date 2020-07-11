@@ -1,0 +1,2 @@
+Replace bst.cpp and bst.h in this directory with your implementation of BST tree, and copy avl.cpp and avl.h from part 1 of this assignment.
+Make sure you include both implementations at the top of you dictionary programs.
